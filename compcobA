@@ -1,0 +1,45 @@
+//GRAPCOB  JOB CLASS=A,MSGCLASS=H,NOTIFY=&SYSUID                        
+//COBOL  EXEC PGM=IGYCRCTL,REGION=4M,                                   
+//            PARM=(NODYNAM,LIB,RENT,LIST,MAP,XREF,OPT,                 
+//            'APOST,TRUNC(OPT),CICS(''COBOL3,SP'')')                   
+//STEPLIB  DD DSN=IGY.V4R2M0.SIGYCOMP,DISP=SHR                          
+//         DD DISP=SHR,DSN=CICSTS.V5R4.CICS.SDFHLOAD                    
+//SYSLIB   DD DISP=SHR,DSN=CICSTS.V5R4.CICS.SDFHCOB                     
+//         DD DISP=SHR,DSN=DYPDONG.GRAPHQL.SOURCE                       
+//*        DD DISP=SHR,DSN=ANTZ.CICS.TS.DEV.INTEGRAT.SDFHSAMP           
+//SYSPRINT DD SYSOUT=*                                                  
+//SYSLIN   DD DSN=&&LOADSET,DISP=(MOD,PASS),                            
+//            UNIT=SYSDA,SPACE=(TRK,(3,3))                              
+//SYSUT1   DD UNIT=SYSDA,SPACE=(CYL,(1,1))                              
+//SYSUT2   DD UNIT=SYSDA,SPACE=(CYL,(1,1))                              
+//SYSUT3   DD UNIT=SYSDA,SPACE=(CYL,(1,1))                              
+//SYSUT4   DD UNIT=SYSDA,SPACE=(CYL,(1,1))                              
+//SYSUT5   DD UNIT=SYSDA,SPACE=(CYL,(1,1))                              
+//SYSUT4   DD UNIT=SYSDA,SPACE=(CYL,(1,1))                              
+//SYSUT5   DD UNIT=SYSDA,SPACE=(CYL,(1,1))                              
+//SYSUT6   DD UNIT=SYSDA,SPACE=(CYL,(1,1))                              
+//SYSUT7   DD UNIT=SYSDA,SPACE=(CYL,(1,1))                              
+//SYSIN    DD DISP=SHR,DSN=CICSTS.CICSXX.COB(FCBOOK)                    
+//COPYLINK EXEC PGM=IEBGENER,COND=(7,LT,COBOL)                          
+//SYSUT1   DD *                                                         
+/*                                                                      
+//SYSUT2   DD DSN=&&COPYLINK,DISP=(NEW,PASS),                           
+//            DCB=(LRECL=80,BLKSIZE=400,RECFM=FB),                      
+//            UNIT=SYSDA,SPACE=(400,(20,20))                            
+//SYSPRINT DD SYSOUT=*                                                  
+//SYSIN    DD DUMMY                                                     
+//LKED   EXEC PGM=IEWL,REGION=4M,                                       
+//          PARM=(XREF,LIST,LET,RENT,'AMODE(31)','RMODE(ANY)'),         
+//          COND=(7,LT,COBOL)                                           
+//SYSLIB   DD DISP=SHR,DSN=CICSTS.V5R4.CICS.SDFHLOAD                    
+//         DD DSN=CEE.SCEELKED,DISP=SHR                                 
+//SYSUT1   DD UNIT=SYSDA,DCB=BLKSIZE=1024,                              
+//            SPACE=(1024,(200,20))                                     
+//SYSPRINT DD SYSOUT=*                                                  
+//SYSLIN   DD DSN=&&COPYLINK,DISP=(OLD,DELETE)                          
+//         DD DSN=&&LOADSET,DISP=(OLD,DELETE)                           
+//         DD DDNAME=SYSIN                                              
+//SYSLMOD  DD DISP=SHR,DSN=CICSTS.CICSXX.LOAD                           
+//SYSIN  DD *                                                           
+    NAME FCBOOK(R)                                                      
+/*                                                                      

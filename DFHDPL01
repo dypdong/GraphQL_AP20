@@ -1,0 +1,165 @@
+//DFH$DPLY JOB CLASS=A,MSGCLASS=A,NOTIFY=&SYSUID
+//*
+//*********************************************************************
+//*                                                                   *
+//*   MODULE NAME = DFH$DPLY                                          *
+//*                                                                   *
+//*   DESCRIPTIVE NAME = Sample JCL for running DFHDPLOY              *
+//*                                                                   *
+//*                                                                   *
+//*                                                                   *
+//*        Licensed Materials - Property of IBM                       *
+//*                                                                   *
+//*        5655-Y04                                                   *
+//*                                                                   *
+//*        (C) Copyright IBM Corp. 2016, 2017 All Rights Reserved.    *
+//*                                                                   *
+//*                                                                   *
+//*                                                                   *
+//*                                                                   *
+//*   STATUS = 7.2.0                                                  *
+//*                                                                   *
+//*   CHANGE ACTIVITY :                                               *
+//*                                                                   *
+//*        $MOD(DFH$DPLY),COMP(DAT),PROD(CICS TS ):                   *
+//*                                                                   *
+//*     PN= REASON REL YYMMDD HDXIII  : REMARKS                       *
+//*    $L0= R82951 700 140923 HDGFCAH : Initial development           *
+//*        PI72104 680 170220 HDJEAB  : SET PROGRAM/PERFORM PIPELINE  *
+//*                                                                   *
+//*********************************************************************
+//*
+//          SET  CPSMHLQ=CICSTS.V5R5.CPSM
+//          SET  CICSHLQ=CICSTS.V5R5.CICS
+//*
+//DFHDPLOY  EXEC PGM=DFHDPLOY,REGION=100M
+//*
+//STEPLIB   DD   DISP=SHR,DSN=&CPSMHLQ..SEYUAUTH
+//          DD   DISP=SHR,DSN=&CICSHLQ..SDFHLOAD
+//*
+//SYSTSPRT  DD   SYSOUT=*
+//*
+//****************************************************************
+//* Uncomment the following DD card (DPLOYTRC) to enable trace.  *
+//****************************************************************
+//*DPLOYTRC  DD   SYSOUT=*
+//*
+//SYSIN  DD   *
+*
+*  DFHDPLOY Syntax Quick Reference:
+*
+*  Blank lines and comments that start with a * character are ignored.
+*
+*====================================================================
+*
+*   Define the CICSplex to connect to and use to manage applications
+*   and bundles in subsequent commands. Optionally specify which CMAS
+*   in the CICSplex will process the DFHDPLOY commands.
+*
+   SET CICSPLEX(CPSM55PX)
+       CMAS(CICS55CM);
+*
+*====================================================================
+*
+*   Define a CICS bundle resource and transition it towards an
+*   ENABLED state within the current CICSplex.
+*
+ UNDEPLOY BUNDLE(GQBUNDLE)
+          SCOPE(CICS5502)
+          STATE(DISCARDED);
+ DEPLOY BUNDLE(GQBUNDLE)
+        SCOPE(CICS5502)
+    BUNDLEDIR(/u/dypdong/mybundles/AP2019DEVOPS/AP2019GraphQL_1.0.0)
+        STATE(ENABLED);
+*
+*====================================================================
+*
+*   Transition a defined and installed bundle from its current state
+*   to a specified target state in a CICS system or group of CICS
+*   systems. For example, the SET BUNDLE command can change the
+*   bundle state from AVAILABLE to DISABLED, or from DISABLED to
+*   AVAILABLE. The valid states are AVAILABLE, UNAVAILABLE, ENABLED,
+*   DISABLED. PHASEIN can be also be used instead of the STATE
+*   parameter to PHASEIN a higher version of an OSGi bundle without
+*   distrupting active tasks. PHASEIN can only be used if the bundle
+*   is in an ENABLED state.
+*
+*  SET BUNDLE(WEBSITE)
+*      SCOPE(GROUP1)
+*      STATE(DISABLED);
+*
+*====================================================================
+*
+*   Transition a CICS bundle resource towards a specified target state
+*   of UNAVAILBLE, DISABLED or DISCARDED within the current CICSplex.
+*
+*  UNDEPLOY BUNDLE(WEBSITE)
+*           SCOPE(GROUP1)
+*           STATE(DISCARDED);
+*
+*====================================================================
+*
+*   Define a CICS application and transition it towards a specified
+*   target state of DISABLED, ENABLED or AVAILABLE in a platform
+*   within the current CICSplex.
+*
+*  DEPLOY APPLICATION(APP1)
+*         STATE(AVAILABLE)
+*  APPLDIR(/var/cicsts/MYPLEX/platform1/applications/application1/)
+*  BINDDIR(/var/cicsts/MYPLEX/platform1/bindings/binding1/);
+*
+*====================================================================
+*
+*   Transition a defined and installed application from its current
+*   state to a specified target state, in a platform within the
+*   current CICSplex. For example, the SET APPLICATION command can
+*   change the state of an application from AVAILABLE to UNAVAILABLE.
+*   The valid states are AVAILABLE, UNAVAILABLE, ENABLED and DISABLED.
+*
+*  SET APPLICATION(APP1)
+*      VERSION(1.0.1)
+*      PLATFORM(DEV)
+*      STATE(UNAVAILABLE);
+*
+*====================================================================
+*
+*   Transition a CICS application towards a specified target state
+*   of UNAVAILBLE, DISABLED or DISCARDED in a platform within the
+*   current CICSplex.
+*
+*  UNDEPLOY APPLICATION(APP1)
+*           VERSION(1.0.1)
+*           PLATFORM(DEV)
+*           STATE(DISCARDED);
+*
+*====================================================================
+*   The following added for APAR PI72104.
+*
+*   Change the instance of an installed PROGRAM, in a CICS system or
+*   group of CICS systems. Use this command with the PHASEIN option
+*   to phase in a new version of a PROGRAM without disrupting active
+*   tasks or NEWCOPY option to use a new copy of the PROGRAM when the
+*   PROGRAM ceases to be in use by any transaction.
+*
+*  SET PROGRAM(PROGNAME)
+*      SCOPE(GROUP1)
+*      PHASEIN;
+*
+   SET PROGRAM(FCBOOK)
+       SCOPE(CICS5502)
+       NEWCOPY;
+*
+*====================================================================
+*   The following added for APAR PI72104.
+*
+*   Use this command with the SCAN option command to initiate a scan
+*   of the web service binding directory that is specified in the
+*   WSDIR attribute of the PIPELINE.
+*
+*  PERFORM PIPELINE(PIPENAME)
+*          SCOPE(GROUP1)
+*          SCAN;
+*
+*====================================================================
+*
+//

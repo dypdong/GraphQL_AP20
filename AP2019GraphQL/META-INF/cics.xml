@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<manifest xmlns="http://www.ibm.com/xmlns/prod/cics/bundle" id="AP2019GraphQL" bundleMajorVer="1" bundleMinorVer="0" bundleMicroVer="0" bundleVersion="1" bundleRelease="0" build="IntB-201705232112">
+    <meta_directives>
+        <timestamp>2019-07-17T15:37:08.861+08:00</timestamp>
+    </meta_directives>
+    <define name="AP2019GraphQLSample" type="http://www.ibm.com/xmlns/prod/cics/bundle/WARBUNDLE" path="AP2019GraphQLSample.warbundle"/>
+</manifest>
