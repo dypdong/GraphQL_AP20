@@ -65,10 +65,10 @@
 *   ENABLED state within the current CICSplex.
 *
  UNDEPLOY BUNDLE(GQBUNDLE)
-          SCOPE(CICS5502)
+          SCOPE(CICS5520)
           STATE(DISCARDED);
  DEPLOY BUNDLE(GQBUNDLE)
-        SCOPE(CICS5502)
+        SCOPE(CICS5520)
     BUNDLEDIR(/u/dypdong/mybundles/AP2019DEVOPS/AP2019GraphQL_1.0.0)
         STATE(ENABLED);
 *
@@ -146,7 +146,7 @@
 *      PHASEIN;
 *
    SET PROGRAM(FCBOOK)
-       SCOPE(CICS5502)
+       SCOPE(CICS5520)
        NEWCOPY;
 *
 *====================================================================
