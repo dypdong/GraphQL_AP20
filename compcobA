@@ -19,7 +19,7 @@
 //SYSUT5   DD UNIT=SYSDA,SPACE=(CYL,(1,1))                              
 //SYSUT6   DD UNIT=SYSDA,SPACE=(CYL,(1,1))                              
 //SYSUT7   DD UNIT=SYSDA,SPACE=(CYL,(1,1))                              
-//SYSIN    DD DISP=SHR,DSN=CICSTS.CICSXX.COB(FCBOOK)                    
+//SYSIN    DD DISP=SHR,DSN=CICSTS.CICS20.COB(FCBOOK)                    
 //COPYLINK EXEC PGM=IEBGENER,COND=(7,LT,COBOL)                          
 //SYSUT1   DD *                                                         
 /*                                                                      
@@ -39,7 +39,7 @@
 //SYSLIN   DD DSN=&&COPYLINK,DISP=(OLD,DELETE)                          
 //         DD DSN=&&LOADSET,DISP=(OLD,DELETE)                           
 //         DD DDNAME=SYSIN                                              
-//SYSLMOD  DD DISP=SHR,DSN=CICSTS.CICSXX.LOAD                           
+//SYSLMOD  DD DISP=SHR,DSN=CICSTS.CICS20.LOAD                           
 //SYSIN  DD *                                                           
     NAME FCBOOK(R)                                                      
 /*                                                                      
