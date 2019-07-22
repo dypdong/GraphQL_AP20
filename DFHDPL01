@@ -63,7 +63,7 @@
  
  DEPLOY BUNDLE(GQBUNDLE)
         SCOPE(CICS5520)
-    BUNDLEDIR(/cicssvy/cics5520/mybundles)
+    BUNDLEDIR(/cicssvy/cics5520/mybundles/AP2019GraphQL_1.0.0)
         STATE(ENABLED);
 
    SET PROGRAM(FCBOOK)
