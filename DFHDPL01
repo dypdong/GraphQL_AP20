@@ -52,11 +52,6 @@
    SET CICSPLEX(CPSM55PX)
        CMAS(CICS55CM);
  
-   SET BUNDLE(GQBUNDLE)    
-     SCOPE(CICS5520)     
-     STATE(DISABLED);    
-                         
-
  UNDEPLOY BUNDLE(GQBUNDLE)
           SCOPE(CICS5520)
           STATE(DISCARDED);
