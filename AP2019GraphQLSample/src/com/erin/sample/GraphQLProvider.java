@@ -45,16 +45,16 @@ public class GraphQLProvider {
         System.out.print(GraphQL.newGraphQL(graphQLSchema).build().getClass().getName());
     }
 
-    @Bean
-    public GraphQLSchema getGraphQLSchema() throws IOException {
-        // Read the schema
-    	URL url = Resources.getResource("schema.graphqls");
-        String sdl = Resources.toString(url, Charsets.UTF_8);
-        System.out.print("dypdong");
-        System.out.print(buildSchema(sdl).getClass().getName());
-        return buildSchema(sdl);
-    }
-    
+//    @Bean
+//    public GraphQLSchema getGraphQLSchema() throws IOException {
+//        // Read the schema
+//    	URL url = Resources.getResource("schema.graphqls");
+//        String sdl = Resources.toString(url, Charsets.UTF_8);
+//        System.out.print("dypdong");
+//        System.out.print(buildSchema(sdl).getClass().getName());
+//        return buildSchema(sdl);
+//    }
+//    
     private GraphQLSchema buildSchema(String sdl) {
         //initial Schema
         TypeDefinitionRegistry typeRegistry = new SchemaParser().parse(sdl);
