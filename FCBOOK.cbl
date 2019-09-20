@@ -36,7 +36,7 @@
                            RIDFLD(BOOK-ID)
                            RESP(RESP-CODE)
                            END-EXEC
-            MOVE 8888 TO PAGECOUNT
+            MOVE 1212 TO PAGECOUNT
             IF RESP-CODE = 0 THEN
             EXEC CICS PUT CONTAINER('QUARY-BOOKDATA')
                           CHANNEL('QUARY-BOOK')
