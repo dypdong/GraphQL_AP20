@@ -1,0 +1,8 @@
+//DELETEBU JOB CLASS=A,MSGCLASS=X,NOTIFY=DYPDONG,REGION=0M  
+//DELETDIR EXEC PGM=IKJEFT01,REGION=64M                     
+//SYSEXEC  DD DISP=SHR,DSN=SYS1.SBPXEXEC                    
+//SYSTSPRT DD SYSOUT=*                                      
+//SYSTSIN  DD *                                             
+  OSHELL rm -R +                                            
+    /cicssvy/cics5520/mybundles                  
+/*                                                          
