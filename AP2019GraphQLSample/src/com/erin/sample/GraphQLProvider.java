@@ -27,33 +27,15 @@ public class GraphQLProvider {
     @Autowired
     GraphQLDataFetchers graphQLDataFetchers;
     
-    
-    private GraphQL graphQL;
-
     @Bean
-    public GraphQL graphQL() { 
-        return graphQL;
-    }
-
-    @PostConstruct
-    public void init() throws IOException {
-        URL url = Resources.getResource("schema.graphqls");
+    public GraphQLSchema getGraphQLSchema() throws IOException {
+        // Read the schema
+    	URL url = Resources.getResource("schema.graphqls");
         String sdl = Resources.toString(url, Charsets.UTF_8);
-        GraphQLSchema graphQLSchema = buildSchema(sdl);
-        this.graphQL = GraphQL.newGraphQL(graphQLSchema).build();
-        System.out.print("dypfong");
-        System.out.print(GraphQL.newGraphQL(graphQLSchema).build().getClass().getName());
+        System.out.print("dypdong");
+        System.out.print(buildSchema(sdl).getClass().getName());
+        return buildSchema(sdl);
     }
-
-//    @Bean
-//    public GraphQLSchema getGraphQLSchema() throws IOException {
-//        // Read the schema
-//    	URL url = Resources.getResource("schema.graphqls");
-//        String sdl = Resources.toString(url, Charsets.UTF_8);
-//        System.out.print("dypdong");
-//        System.out.print(buildSchema(sdl).getClass().getName());
-//        return buildSchema(sdl);
-//    }
 //    
     private GraphQLSchema buildSchema(String sdl) {
         //initial Schema
